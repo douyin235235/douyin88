@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ZeroIM</title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        mainBg: '#081020',
+                        panelBg: '#0b1629',
+                        borderBlue: '#254670',
+                        accentBlue: '#4299e1',
+                        textGray: '#b0c4de',
+                        textWhite: '#ffffff'
+                    },
+                    fontFamily: {
+                        sans: ['system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .btn-primary {
+                @apply px-3 py-1 rounded text-sm bg-accentBlue text-white hover:bg-accentBlue/90 transition-colors whitespace-nowrap;
+            }
+        }
+        .single-line-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .input-inline {
+            flex: 1;
+            min-width: 260px;
+            background: #0b1629;
+            border: 1px solid #254670;
+            border-radius: 4px;
+            padding: 4px 8px;
+            color: #e6f0ff;
+            outline: none;
+        }
+        .input-inline:focus {
+            border-color: #4299e1;
+            box-shadow: 0 0 0 1px #4299e140;
+        }
+        .invite-display {
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            font-weight: 600;
+            color: #7ec8f0;
+            letter-spacing: 0.5px;
+            background: #0a1a35;
+            padding: 2px 14px;
+            border-radius: 4px;
+            border: 1px solid #254670;
+            min-width: 280px;
+            text-align: center;
+            user-select: all;
+            word-break: break-all;
+            flex: 1;
+            min-width: 260px;
+        }
+        .invite-display:focus {
+            border-color: #4299e1;
+            box-shadow: 0 0 0 1px #4299e140;
+            outline: none;
+        }
+        .custom-tag {
+            min-width: 70px;
+            flex-shrink: 0;
+            font-weight: 600;
+            color: #b0c4de;
+            font-size: 14px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 min-h-screen p-6">
+    <div class="max-w-[1100px] mx-auto space-y-1.5">
+
+        <!-- ===== 1：话术 ===== -->
+        <div class="bg-mainBg border border-borderBlue rounded-lg p-3 shadow-inner">
+            <div class="single-line-row">
+                <span class="text-sm text-textGray whitespace-nowrap font-medium custom-tag">1：话术</span>
+                <input type="text" id="text4" class="input-inline" value="你平時玩香港還是新澳呢？我好方便推薦給你內木料紙哦!" />
+                <div class="flex items-center gap-1.5 px-2 py-0.5 bg-panelBg border border-borderBlue rounded whitespace-nowrap">
+                    <span class="text-xs text-textGray">顺序号码</span>
+                    <span id="num4" class="text-accentBlue font-mono font-semibold">0</span>
+                </div>
+                <button onclick="copyCustom(4)" class="btn-primary">复制文字</button>
+            </div>
+        </div>
+
+        <!-- ===== 2：话术 ===== -->
+        <div class="bg-mainBg border border-borderBlue rounded-lg p-3 shadow-inner">
+            <div class="single-line-row">
+                <span class="text-sm text-textGray whitespace-nowrap font-medium custom-tag">2：话术</span>
+                <input type="text" id="text5" class="input-inline" value="那伱可以跟著我們試一下哦！近期我們料紙挺准的，連吃了几次。" />
+                <div class="flex items-center gap-1.5 px-2 py-0.5 bg-panelBg border border-borderBlue rounded whitespace-nowrap">
+                    <span class="text-xs text-textGray">顺序号码</span>
+                    <span id="num5" class="text-accentBlue font-mono font-semibold">0</span>
+                </div>
+                <button onclick="copyCustom(5)" class="btn-primary">复制文字</button>
+            </div>
+        </div>
+
+        <!-- ===== 3：话术 ===== -->
+        <div class="bg-mainBg border border-borderBlue rounded-lg p-3 shadow-inner">
+            <div class="single-line-row">
+                <span class="text-sm text-textGray whitespace-nowrap font-medium custom-tag">3：话术</span>
+                <input type="text" id="text6" class="input-inline" value="我們可以提供精準的[②霄④碼]，[三(仲)三]，进群就可以領取." />
+                <div class="flex items-center gap-1.5 px-2 py-0.5 bg-panelBg border border-borderBlue rounded whitespace-nowrap">
+                    <span class="text-xs text-textGray">顺序号码</span>
+                    <span id="num6" class="text-accentBlue font-mono font-semibold">0</span>
+                </div>
+                <button onclick="copyCustom(6)" class="btn-primary">复制文字</button>
+            </div>
+        </div>
+
+        <!-- ===== 4：话术 ===== -->
+        <div class="bg-mainBg border border-borderBlue rounded-lg p-3 shadow-inner">
+            <div class="single-line-row">
+                <span class="text-sm text-textGray whitespace-nowrap font-medium custom-tag">4：话术</span>
+                <input type="text" id="text7" class="input-inline" value="我們每晚6點都會在【ZeroIM】群上面免費發放料紙的哦！" />
+                <div class="flex items-center gap-1.5 px-2 py-0.5 bg-panelBg border border-borderBlue rounded whitespace-nowrap">
+                    <span class="text-xs text-textGray">顺序号码</span>
+                    <span id="num7" class="text-accentBlue font-mono font-semibold">0</span>
+                </div>
+                <button onclick="copyCustom(7)" class="btn-primary">复制文字</button>
+            </div>
+        </div>
+
+        <!-- ===== 5：话术 ===== -->
+        <div class="bg-mainBg border border-borderBlue rounded-lg p-3 shadow-inner">
+            <div class="single-line-row">
+                <span class="text-sm text-textGray whitespace-nowrap font-medium custom-tag">5：话术</span>
+                <input type="text" id="text8" class="input-inline" value="伱有【ZeroIM】嗎？" />
+                <div class="flex items-center gap-1.5 px-2 py-0.5 bg-panelBg border border-borderBlue rounded whitespace-nowrap">
+                    <span class="text-xs text-textGray">顺序号码</span>
+                    <span id="num8" class="text-accentBlue font-mono font-semibold">0</span>
+                </div>
+                <button onclick="copyCustom(8)" class="btn-primary">复制文字</button>
+            </div>
+        </div>
+
+        <!-- ===== 6：话术 ===== -->
+        <div class="bg-mainBg border border-borderBlue rounded-lg p-3 shadow-inner">
+            <div class="single-line-row">
+                <span class="text-sm text-textGray whitespace-nowrap font-medium custom-tag">6：话术</span>
+                <input type="text" id="text9" class="input-inline" value="花一分鐘，我帶伱下一個【ZeroIM】，今晚可以去驗證一下准不准，要是沒能讓伱滿意伱在卸載也可以。" />
+                <div class="flex items-center gap-1.5 px-2 py-0.5 bg-panelBg border border-borderBlue rounded whitespace-nowrap">
+                    <span class="text-xs text-textGray">顺序号码</span>
+                    <span id="num9" class="text-accentBlue font-mono font-semibold">0</span>
+                </div>
+                <button onclick="copyCustom(9)" class="btn-primary">复制文字</button>
+            </div>
+        </div>
+
+        <!-- ===== 7：话术 ===== -->
+        <div class="bg-mainBg border border-borderBlue rounded-lg p-3 shadow-inner">
+            <div class="single-line-row">
+                <span class="text-sm text-textGray whitespace-nowrap font-medium custom-tag">7：话术</span>
+                <input type="text" id="text10" class="input-inline" value="伱使用的是【安卓】還是【蘋果】手機我教伱哦" />
+                <div class="flex items-center gap-1.5 px-2 py-0.5 bg-panelBg border border-borderBlue rounded whitespace-nowrap">
+                    <span class="text-xs text-textGray">顺序号码</span>
+                    <span id="num10" class="text-accentBlue font-mono font-semibold">0</span>
+                </div>
+                <button onclick="copyCustom(10)" class="btn-primary">复制文字</button>
+            </div>
+        </div>
+
+        <!-- ===== 8：话术 ===== -->
+        <div class="bg-mainBg border border-borderBlue rounded-lg p-3 shadow-inner">
+            <div class="single-line-row">
+                <span class="text-sm text-textGray whitespace-nowrap font-medium custom-tag">8：话术</span>
+                <input type="text" id="text11" class="input-inline" value="ZeroIM" />
+                <div class="flex items-center gap-1.5 px-2 py-0.5 bg-panelBg border border-borderBlue rounded whitespace-nowrap">
+                    <span class="text-xs text-textGray">顺序号码</span>
+                    <span id="num11" class="text-accentBlue font-mono font-semibold">0</span>
+                </div>
+                <button onclick="copyCustom(11)" class="btn-primary">复制文字</button>
+            </div>
+        </div>
+
+        <!-- ===== 9：话术 ===== -->
+        <div class="bg-mainBg border border-borderBlue rounded-lg p-3 shadow-inner">
+            <div class="single-line-row">
+                <span class="text-sm text-textGray whitespace-nowrap font-medium custom-tag">9：话术</span>
+                <input type="text" id="text12" class="input-inline" value="打開：应用商店，搜索：【ZeroIM】點擊【下崽】， 下好了告訴我，我教你領料。" />
+                <div class="flex items-center gap-1.5 px-2 py-0.5 bg-panelBg border border-borderBlue rounded whitespace-nowrap">
+                    <span class="text-xs text-textGray">顺序号码</span>
+                    <span id="num12" class="text-accentBlue font-mono font-semibold">0</span>
+                </div>
+                <button onclick="copyCustom(12)" class="btn-primary">复制文字</button>
+            </div>
+        </div>
+
+        <!-- ===== 10：话术 ===== -->
+        <div class="bg-mainBg border border-borderBlue rounded-lg p-3 shadow-inner">
+            <div class="single-line-row">
+                <span class="text-sm text-textGray whitespace-nowrap font-medium custom-tag">10：话术</span>
+                <input type="text" id="text13" class="input-inline" value="打開：AppStore，搜索：【ZeroIM】點擊【获取】， 下好了告訴我，我教你領料。" />
+                <div class="flex items-center gap-1.5 px-2 py-0.5 bg-panelBg border border-borderBlue rounded whitespace-nowrap">
+                    <span class="text-xs text-textGray">顺序号码</span>
+                    <span id="num13" class="text-accentBlue font-mono font-semibold">0</span>
+                </div>
+                <button onclick="copyCustom(13)" class="btn-primary">复制文字</button>
+            </div>
+        </div>
+
+        <!-- ===== 11：话术 ===== -->
+        <div class="bg-mainBg border border-borderBlue rounded-lg p-3 shadow-inner">
+            <div class="single-line-row">
+                <span class="text-sm text-textGray whitespace-nowrap font-medium custom-tag">11：话术</span>
+                <input type="text" id="text1" class="input-inline" value="按照這個填寫和註冊，邀请码【HH8888】完成後回覆我【好了】" />
+                <div class="flex items-center gap-1.5 px-2 py-0.5 bg-panelBg border border-borderBlue rounded whitespace-nowrap">
+                    <span class="text-xs text-textGray">顺序号码</span>
+                    <span id="num1" class="text-accentBlue font-mono font-semibold">0</span>
+                </div>
+                <button onclick="copyText(1)" class="btn-primary">复制文字</button>
+            </div>
+        </div>
+
+        <!-- ===== 12：话术 ===== -->
+        <div class="bg-mainBg border border-borderBlue rounded-lg p-3 shadow-inner">
+            <div class="single-line-row">
+                <span class="text-sm text-textGray whitespace-nowrap font-medium custom-tag">12：话术</span>
+                <input type="text" id="text2" class="input-inline" value="搜索：HH9999" />
+                <div class="flex items-center gap-1.5 px-2 py-0.5 bg-panelBg border border-borderBlue rounded whitespace-nowrap">
+                    <span class="text-xs text-textGray">顺序号码</span>
+                    <span id="num2" class="text-accentBlue font-mono font-semibold">0</span>
+                </div>
+                <button onclick="copyText(2)" class="btn-primary">复制文字</button>
+            </div>
+        </div>
+
+        <!-- ===== 13：随机码（实时月-日:分钟 + 100系列递增） ===== -->
+        <div class="bg-mainBg border border-borderBlue rounded-lg p-3 shadow-inner">
+            <div class="single-line-row">
+                <span class="text-sm text-textGray whitespace-nowrap font-medium custom-tag">13：话术</span>
+                <input type="text" id="inviteDisplay13" class="invite-display" readonly />
+                <div class="flex items-center gap-1.5 px-2 py-0.5 bg-panelBg border border-borderBlue rounded whitespace-nowrap">
+                    <span class="text-xs text-textGray">顺序号码</span>
+                    <span id="num13_new" class="text-accentBlue font-mono font-semibold">0</span>
+                </div>
+                <button onclick="copyInviteStat(13, 100)" class="btn-primary">复制文字</button>
+            </div>
+        </div>
+
+        <!-- ===== 14：随机码（实时月-日:分钟 + 200系列递增） ===== -->
+        <div class="bg-mainBg border border-borderBlue rounded-lg p-3 shadow-inner">
+            <div class="single-line-row">
+                <span class="text-sm text-textGray whitespace-nowrap font-medium custom-tag">14：话术</span>
+                <input type="text" id="inviteDisplay14" class="invite-display" readonly />
+                <div class="flex items-center gap-1.5 px-2 py-0.5 bg-panelBg border border-borderBlue rounded whitespace-nowrap">
+                    <span class="text-xs text-textGray">顺序号码</span>
+                    <span id="num14" class="text-accentBlue font-mono font-semibold">0</span>
+                </div>
+                <button onclick="copyInviteStat(14, 200)" class="btn-primary">复制文字</button>
+            </div>
+        </div>
+
+        <!-- ===== 15：随机码（实时月-日:分钟 + 300系列递增） ===== -->
+        <div class="bg-mainBg border border-borderBlue rounded-lg p-3 shadow-inner">
+            <div class="single-line-row">
+                <span class="text-sm text-textGray whitespace-nowrap font-medium custom-tag">15：话术</span>
+                <input type="text" id="inviteDisplay15" class="invite-display" readonly />
+                <div class="flex items-center gap-1.5 px-2 py-0.5 bg-panelBg border border-borderBlue rounded whitespace-nowrap">
+                    <span class="text-xs text-textGray">顺序号码</span>
+                    <span id="num15" class="text-accentBlue font-mono font-semibold">0</span>
+                </div>
+                <button onclick="copyInviteStat(15, 300)" class="btn-primary">复制文字</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // ===================== 常量 =====================
+        const START_NUM = 0;
+        const START_COUNT = 0;
+
+        // ===================== 所有话术的默认值 =====================
+        const DEFAULT_TEXTS = {
+            1: '按照這個填寫和註冊，邀请码【HH8888】完成後回覆我【好了】',
+            2: '搜索联系：HH9999',
+            4: '你平時玩香港還是新澳呢？我好方便推薦給你內木料紙哦!',
+            5: '那伱可以跟著我們試一下哦！近期我們料紙挺准的，連吃了几次。',
+            6: '我們可以提供精準的[②霄④碼]，[三(仲)三]，进群就可以領取.',
+            7: '我們每晚6點都會在【ZeroIM】群上面免費發放料紙的哦！',
+            8: '伱有【ZeroIM】嗎？',
+            9: '花一分鐘，我帶伱下一個【ZeroIM】，今晚可以去驗證一下准不准，要是沒能讓伱滿意伱在卸載也可以。',
+            10: '伱使用的是【安卓】還是【蘋果】手機我教伱哦',
+            11: 'ZeroIM',
+            12: '打開：应用商店，搜索：【ZeroIM】点击【下崽】， 下好了告訴我，我教你領料',
+            13: '打開：AppStore，搜索：【ZeroIM】点击【获取】， 下好了告訴我，我教你領料。'
+        };
+
+        // ===================== 工具函数 =====================
+
+        function getBeijingMidnight() {
+            const now = new Date();
+            const beijing = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Shanghai' }));
+            beijing.setHours(0, 0, 0, 0);
+            return beijing.getTime();
+        }
+
+        function getBeijingFullTimeStr() {
+            const now = new Date();
+            const beijing = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Shanghai' }));
+            const year = beijing.getFullYear();
+            const month = String(beijing.getMonth() + 1).padStart(2, '0');
+            const day = String(beijing.getDate()).padStart(2, '0');
+            const hours = String(beijing.getHours()).padStart(2, '0');
+            const minutes = String(beijing.getMinutes()).padStart(2, '0');
+            const seconds = String(beijing.getSeconds()).padStart(2, '0');
+            return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+        }
+
+        // ===================== 获取实时时间前缀（月-日:分钟） =====================
+        function getCurrentTimePrefix() {
+            const now = new Date();
+            const beijing = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Shanghai' }));
+            const month = String(beijing.getMonth() + 1).padStart(2, '0');
+            const day = String(beijing.getDate()).padStart(2, '0');
+            const minutes = String(beijing.getMinutes()).padStart(2, '0');
+            return `${month}-${day}:${minutes}`;
+        }
+
+        // ===================== 生成随机码 =====================
+        function generateStatCode(statValue) {
+            return `随机码${getCurrentTimePrefix()}:${statValue}`;
+        }
+
+        // ===================== 跨天重置 =====================
+
+        function checkDailyReset() {
+            const lastReset = localStorage.getItem('lastResetTime');
+            const todayZero = getBeijingMidnight();
+
+            if (!lastReset || Number(lastReset) < todayZero) {
+                localStorage.setItem('seq1', START_NUM);
+                localStorage.setItem('seq2', START_NUM);
+                localStorage.setItem('totalWechat', START_COUNT);
+                localStorage.setItem('totalOfficial', START_COUNT);
+                localStorage.setItem('totalInvite', START_COUNT);
+                localStorage.setItem('totalStat100', START_COUNT);
+                localStorage.setItem('totalStat200', START_COUNT);
+                localStorage.setItem('totalStat300', START_COUNT);
+
+                for (let i = 4; i <= 13; i++) {
+                    localStorage.setItem('seq' + i, START_NUM);
+                    localStorage.setItem('total' + i, START_COUNT);
+                }
+                // 注意：不再使用 seq14/seq15
+
+                // 重置统计话术的当前数值（从初始值开始）
+                localStorage.setItem('statVal13', '100');
+                localStorage.setItem('statVal14', '200');
+                localStorage.setItem('statVal15', '300');
+
+                localStorage.setItem('copyLogs', JSON.stringify([]));
+                localStorage.setItem('lastResetTime', todayZero);
+            }
+        }
+
+        // ===================== 渲染第13、14、15条 =====================
+
+        function renderInviteStats() {
+            // 13
+            const el13 = document.getElementById('inviteDisplay13');
+            const val13 = parseInt(localStorage.getItem('statVal13') || '100', 10);
+            if (el13) {
+                el13.value = generateStatCode(val13);
+                // 顺序号码 = 当前数值 - 基数（100）
+                document.getElementById('num13_new').textContent = val13 - 100;
+            }
+            // 14
+            const el14 = document.getElementById('inviteDisplay14');
+            const val14 = parseInt(localStorage.getItem('statVal14') || '200', 10);
+            if (el14) {
+                el14.value = generateStatCode(val14);
+                document.getElementById('num14').textContent = val14 - 200;
+            }
+            // 15
+            const el15 = document.getElementById('inviteDisplay15');
+            const val15 = parseInt(localStorage.getItem('statVal15') || '300', 10);
+            if (el15) {
+                el15.value = generateStatCode(val15);
+                document.getElementById('num15').textContent = val15 - 300;
+            }
+        }
+
+        // ===================== 渲染所有统计 =====================
+
+        function renderAllStats() {
+            document.getElementById('num1').textContent = localStorage.getItem('seq1') || START_NUM;
+            document.getElementById('num2').textContent = localStorage.getItem('seq2') || START_NUM;
+
+            for (let i = 4; i <= 13; i++) {
+                const el = document.getElementById('num' + i);
+                if (el) {
+                    el.textContent = localStorage.getItem('seq' + i) || START_NUM;
+                }
+            }
+            renderInviteStats();
+        }
+
+        // ===================== 从 localStorage 恢复所有输入框内容 =====================
+
+        function restoreAllTexts() {
+            const ids = [1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+
+            ids.forEach(id => {
+                const el = document.getElementById('text' + id);
+                if (!el) return;
+                const key = 'content' + id;
+                const saved = localStorage.getItem(key);
+                if (saved !== null) {
+                    el.value = saved;
+                } else {
+                    const defaultVal = DEFAULT_TEXTS[id] || '';
+                    el.value = defaultVal;
+                    localStorage.setItem(key, defaultVal);
+                }
+            });
+        }
+
+        // ===================== 页面初始化 =====================
+
+        window.onload = function() {
+            checkDailyReset();
+            restoreAllTexts();
+
+            // 确保统计话术的当前值存在
+            if (!localStorage.getItem('statVal13')) localStorage.setItem('statVal13', '100');
+            if (!localStorage.getItem('statVal14')) localStorage.setItem('statVal14', '200');
+            if (!localStorage.getItem('statVal15')) localStorage.setItem('statVal15', '300');
+
+            renderAllStats();
+
+            // 绑定输入框保存事件
+            document.getElementById('text1').addEventListener('input', function() {
+                localStorage.setItem('content1', this.value);
+            });
+            document.getElementById('text2').addEventListener('input', function() {
+                localStorage.setItem('content2', this.value);
+            });
+            for (let i = 4; i <= 13; i++) {
+                const el = document.getElementById('text' + i);
+                if (el) {
+                    el.addEventListener('input', (function(idx) {
+                        return function() {
+                            localStorage.setItem('content' + idx, this.value);
+                        };
+                    })(i));
+                }
+            }
+
+            // 每分钟刷新一次随机码显示（让时间保持最新）
+            setInterval(() => {
+                renderInviteStats();
+            }, 60000);
+        };
+
+        // ===================== 复制普通话术 =====================
+
+        function copyText(areaId) {
+            checkDailyReset();
+            const textEl = document.getElementById('text' + areaId);
+            const btn = event.currentTarget;
+            const content = textEl.value.trim();
+
+            if (!content) {
+                alert('请先输入要复制的内容');
+                return;
+            }
+
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(content).then(() => afterCopyText(areaId, btn)).catch(() => fallbackCopyText(content, areaId, btn));
+            } else {
+                fallbackCopyText(content, areaId, btn);
+            }
+        }
+
+        function fallbackCopyText(text, areaId, btn) {
+            const tmp = document.createElement('textarea');
+            tmp.value = text;
+            tmp.style.cssText = 'position:fixed;top:-9999px;left:-9999px;opacity:0;';
+            document.body.appendChild(tmp);
+            tmp.select();
+            try {
+                document.execCommand('copy');
+                afterCopyText(areaId, btn);
+            } catch {
+                alert('复制失败，请手动选中内容按 Ctrl+C');
+            }
+            document.body.removeChild(tmp);
+        }
+
+        function afterCopyText(areaId, btn) {
+            const source = areaId === 1 ? '抖音' : '接待员';
+            const seqKey = 'seq' + areaId;
+            const totalKey = areaId === 1 ? 'totalWechat' : 'totalOfficial';
+
+            let seq = Number(localStorage.getItem(seqKey) || START_NUM);
+            let total = Number(localStorage.getItem(totalKey) || START_COUNT);
+            seq++;
+            total++;
+            localStorage.setItem(seqKey, seq);
+            localStorage.setItem(totalKey, total);
+            document.getElementById('num' + areaId).textContent = seq;
+
+            const logs = JSON.parse(localStorage.getItem('copyLogs') || '[]');
+            logs.unshift({
+                time: getBeijingFullTimeStr(),
+                source: source,
+                num: total
+            });
+            localStorage.setItem('copyLogs', JSON.stringify(logs));
+            const oldText = btn.textContent;
+            btn.textContent = '✓ 已复制';
+            setTimeout(() => btn.textContent = oldText, 1200);
+        }
+
+        // ===================== 复制自定义话术 =====================
+
+        function copyCustom(index) {
+            checkDailyReset();
+            const textEl = document.getElementById('text' + index);
+            const btn = event.currentTarget;
+            const content = textEl.value.trim();
+
+            if (!content) {
+                alert('请先输入要复制的内容');
+                return;
+            }
+
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(content).then(() => afterCopyCustom(index, btn)).catch(() =>
+                    fallbackCopyCustom(content, index, btn));
+            } else {
+                fallbackCopyCustom(content, index, btn);
+            }
+        }
+
+        function fallbackCopyCustom(text, index, btn) {
+            const tmp = document.createElement('textarea');
+            tmp.value = text;
+            tmp.style.cssText = 'position:fixed;top:-9999px;left:-9999px;opacity:0;';
+            document.body.appendChild(tmp);
+            tmp.select();
+            try {
+                document.execCommand('copy');
+                afterCopyCustom(index, btn);
+            } catch {
+                alert('复制失败，请手动选中内容按 Ctrl+C');
+            }
+            document.body.removeChild(tmp);
+        }
+
+        function afterCopyCustom(index, btn) {
+            const source = '话术' + (index - 3);
+            const seqKey = 'seq' + index;
+            const totalKey = 'total' + index;
+
+            let seq = Number(localStorage.getItem(seqKey) || START_NUM);
+            let total = Number(localStorage.getItem(totalKey) || START_COUNT);
+            seq++;
+            total++;
+            localStorage.setItem(seqKey, seq);
+            localStorage.setItem(totalKey, total);
+
+            const numEl = document.getElementById('num' + index);
+            if (numEl) numEl.textContent = seq;
+
+            const logs = JSON.parse(localStorage.getItem('copyLogs') || '[]');
+            logs.unshift({
+                time: getBeijingFullTimeStr(),
+                source: source,
+                num: total
+            });
+            localStorage.setItem('copyLogs', JSON.stringify(logs));
+
+            const oldText = btn.textContent;
+            btn.textContent = '✓ 已复制';
+            setTimeout(() => btn.textContent = oldText, 1200);
+        }
+
+        // ===================== 复制统计话术 (13,14,15) =====================
+
+        function copyInviteStat(areaId, baseValue) {
+            checkDailyReset();
+
+            // 获取当前存储的数值
+            const valKey = 'statVal' + areaId;
+            let currentVal = parseInt(localStorage.getItem(valKey) || String(baseValue), 10);
+            // 递增
+            currentVal++;
+            localStorage.setItem(valKey, String(currentVal));
+
+            // 生成新的显示内容（使用实时月-日:分钟 + 数值）
+            const newCode = generateStatCode(currentVal);
+
+            // 更新显示框
+            const displayId = areaId === 13 ? 'inviteDisplay13' : areaId === 14 ? 'inviteDisplay14' : 'inviteDisplay15';
+            const displayEl = document.getElementById(displayId);
+            if (displayEl) displayEl.value = newCode;
+
+            // 更新顺序号码（差值计算，不再单独存储）
+            const numMap = { 13: 'num13_new', 14: 'num14', 15: 'num15' };
+            const numEl = document.getElementById(numMap[areaId]);
+            if (numEl) numEl.textContent = currentVal - baseValue;
+
+            // 统计总数（仅用于日志）
+            const totalKey = 'totalStat' + baseValue;
+            let total = Number(localStorage.getItem(totalKey) || START_COUNT);
+            total++;
+            localStorage.setItem(totalKey, total);
+
+            const logs = JSON.parse(localStorage.getItem('copyLogs') || '[]');
+            logs.unshift({
+                time: getBeijingFullTimeStr(),
+                source: '统计' + baseValue,
+                num: total
+            });
+            localStorage.setItem('copyLogs', JSON.stringify(logs));
+
+            // 复制到剪贴板
+            const doCopy = () => {
+                const btns = document.querySelectorAll('[onclick*="copyInviteStat(' + areaId + ',"]');
+                const btn = btns[0] || event.currentTarget;
+                const oldText = btn.textContent;
+                btn.textContent = '✓ 已复制';
+                setTimeout(() => btn.textContent = oldText, 1200);
+            };
+
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(newCode).then(doCopy).catch(() => {
+                    fallbackCopyStat(newCode, doCopy);
+                });
+            } else {
+                fallbackCopyStat(newCode, doCopy);
+            }
+        }
+
+        function fallbackCopyStat(text, callback) {
+            const tmp = document.createElement('textarea');
+            tmp.value = text;
+            tmp.style.cssText = 'position:fixed;top:-9999px;left:-9999px;opacity:0;';
+            document.body.appendChild(tmp);
+            tmp.select();
+            try {
+                document.execCommand('copy');
+                callback();
+            } catch {
+                alert('复制失败，请手动选中内容按 Ctrl+C');
+            }
+            document.body.removeChild(tmp);
+        }
+
+        // ===================== 定时跨天检测 =====================
+
+        setInterval(() => {
+            const lastReset = localStorage.getItem('lastResetTime');
+            const todayZero = getBeijingMidnight();
+            if (!lastReset || Number(lastReset) < todayZero) {
+                checkDailyReset();
+                renderAllStats();
+            }
+        }, 60000);
+
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) {
+                checkDailyReset();
+                renderAllStats();
+            }
+        });
+    </script>
+</body>
+</html>
